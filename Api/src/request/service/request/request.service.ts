@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { paginate } from 'nestjs-typeorm-paginate';
+import { Pagination } from 'nestjs-typeorm-paginate';
+import { IPaginationOptions } from 'nestjs-typeorm-paginate';
 import { from } from 'rxjs';
 import { Observable, of } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
@@ -36,6 +39,25 @@ export class RequestService {
 
     findAll(): Observable<RequestEntry[]> {
         return from(this.requestRepository.find({relations: ['author']}));
+    }
+
+    paginateAll(options: IPaginationOptions): Observable<Pagination<RequestEntry>> {
+        return from(paginate<RequestEntry>(this.requestRepository, options, {
+            relations: ['author']
+        })).pipe(
+            map((requestEntries: Pagination<RequestEntry>) => requestEntries)
+        )
+    }
+
+    paginateByUser(options: IPaginationOptions, userId: number): Observable<Pagination<RequestEntry>> {
+        return from(paginate<RequestEntry>(this.requestRepository, options, {
+            relations: ['author'],
+            where: [
+                {author: userId}
+            ]
+        })).pipe(
+            map((requestEntries: Pagination<RequestEntry>) => requestEntries)
+        )
     }
 
     findOne(id: number): Observable<RequestEntry> {

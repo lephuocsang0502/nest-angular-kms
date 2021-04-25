@@ -20,7 +20,6 @@ export interface UserData{
     last: string;
   }
 }
- 
     
 @Injectable({
   providedIn: 'root'
@@ -51,6 +50,13 @@ export class UsersService {
   
   updateOne(user):Observable<User>{
     return this.http.put('api/user/'+ user.id,user);
+  }
+
+  uploadProfileImage(formData:FormData):Observable<any>{
+    return this.http.post<FormData>('/api/user/upload',formData, {
+      reportProgress:true,
+      observe: 'events'
+    });
   }
 
   paginateByName(page:number,size:number,username:string):Observable<UserData>{

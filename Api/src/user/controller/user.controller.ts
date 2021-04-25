@@ -95,7 +95,7 @@ export class UserController {
         return this.userService.updateRoleOfUser(Number(id),user);
     }
  
-    @UseGuards(JwtAuthGuard,RolesGuard)
+    @UseGuards(JwtAuthGuard)
     @Post('upload')
     @UseInterceptors(FileInterceptor('file', storage))
     uploadFile(@UploadedFile()file ,@Request() req): Observable<object>{

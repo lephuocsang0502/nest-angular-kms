@@ -20,6 +20,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
 import { UpdateUserProfileComponent } from './components/update-user-profile/update-user-profile.component';
 import { JwtHelperService, JWT_OPTIONS } from "@auth0/angular-jwt";
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {MatIconModule} from '@angular/material/icon';
 
 
 @NgModule({
@@ -45,7 +47,9 @@ import { JwtInterceptor } from './interceptors/jwt.interceptor';
     MatSelectModule,
     MatTableModule,
     MatPaginatorModule,
-    MatCardModule
+    MatCardModule,
+    MatProgressBarModule,
+    MatIconModule
   ],
   providers: [
     JwtHelperService,
