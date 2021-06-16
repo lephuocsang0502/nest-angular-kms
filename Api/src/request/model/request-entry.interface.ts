@@ -7,9 +7,11 @@ export interface RequestEntry{
     link: string;
     status:number;
     description: string;
+    body:string;
     createdAt:Date;
     updatedAt:Date;
     publishedDate:Date;
+    headerImage:string;
     isPublished:boolean;
     author:User
 }

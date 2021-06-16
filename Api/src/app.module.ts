@@ -22,7 +22,6 @@ import { RequestModule } from './request/request.module';
       "logging": true
     }),
     UserModule,
-    RequestModule,
     AuthModule,
     RequestModule
   ],

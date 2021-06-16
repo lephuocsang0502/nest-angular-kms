@@ -23,6 +23,12 @@ export class RequestEntryEntity{
     @Column({default: ''})
     description:string;
 
+    @Column({default: ''})
+    body:string;
+
+    @Column({nullable: true})
+    headerImage:string;
+
     @Column({type:'timestamp',default: ()=>"CURRENT_TIMESTAMP"})
     createdAt:Date;
 

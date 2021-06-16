@@ -56,7 +56,7 @@ export class RequestController {
     //         return this.requestService.findByUser(userId);
     //     }
     // }
-
+    @UseGuards(JwtAuthGuard)
     @Get('')
     index(
         @Query('page') page: number = 1,
@@ -87,6 +87,10 @@ export class RequestController {
         }, Number(userId))
     }
 
+    @Get(':id')
+    findOne(@Param('id') id: number): Observable<RequestEntry> {
+        return this.requestService.findOne(id);
+    }
 
     @UseGuards(JwtAuthGuard, UserIsAuthorGuard)
     @Put(':id')
@@ -111,6 +115,6 @@ export class RequestController {
     }
     @Get('image/:imagename')
     findImage(@Param('imagename') imagename, @Res() res): Observable<Object> {
-        return of(res.sendFile(join(process.cwd(), 'uploads/request-entry-images/' + imagename)));
+        return of(res.sendFile(join(process.cwd(), 'uploads/resquest-entry-images/' + imagename)));
     }
 }

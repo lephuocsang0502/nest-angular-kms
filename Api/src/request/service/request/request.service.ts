@@ -23,7 +23,6 @@ export class RequestService {
 
     create(user: User, requestEntry: RequestEntry): Observable<RequestEntry> {
         requestEntry.author = user;
-        console.log(requestEntry);
         return this.generateSlug(requestEntry.spokeCo).pipe(
             switchMap((slug: string) => {
                 requestEntry.slug = slug;

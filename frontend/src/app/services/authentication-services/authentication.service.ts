@@ -3,22 +3,14 @@ import { HttpClient } from '@angular/common/http';
 import { map, tap, switchMap } from 'rxjs/operators';
 import { JwtHelperService } from "@auth0/angular-jwt";
 import { Observable,of } from 'rxjs';
+import { User } from 'src/app/model/user.interface';
 
 export interface LoginForm{
   email:string;
   password: string;
 };
 
-export interface User{
-    id?: number
-    name?: string;
-    username?: string;
-    email?: string;
-    password?: string;
-    role?: string;
-    profileImage?: string;
-  // passwordConfirm?:string;
-};
+
 
 
 export const JWT_NAME='blog-token';
@@ -39,8 +31,12 @@ export class AuthenticationService {
     )
   }
 
+  logout(){
+    localStorage.removeItem(JWT_NAME);
+  }
+
   register(user: User) {
-    return this.http.post<any>('/api/user', user).pipe(
+    return this.http.post<any>('/api/user/register', user).pipe(
       tap(user => console.log(user)),
       map(user => user)
     )

@@ -50,6 +50,8 @@ export class UserController {
             })
         )
     }
+
+    
     @Get(':id')
     findOne(@Param()param):Observable<User>{
         return this.userService.findOne(param.id);
@@ -58,13 +60,13 @@ export class UserController {
     @hasRoles(UserRole.ADMIN)
     @UseGuards(JwtAuthGuard,RolesGuard)
     @Get()
-   
     index( 
         @Query('page') page = 1, 
         @Query('limit') limit = 10,
         @Query('username') username:string
         ):Observable<Pagination<User>>{
         limit = limit > 100 ? 100 : limit;
+        console.log(UserRole.ADMIN);
 
         if(username===null|| username==undefined){
             return this.userService.paginate({page, limit, route: 'http://localhost:3000/api/user'});

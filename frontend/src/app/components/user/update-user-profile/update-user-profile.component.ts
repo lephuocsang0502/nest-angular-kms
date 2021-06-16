@@ -3,7 +3,8 @@ import { Component, OnInit, ViewChild,ElementRef, Inject  } from '@angular/core'
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { of } from 'rxjs';
 import { catchError, map, switchMap, tap } from 'rxjs/operators';
-import { AuthenticationService, User } from 'src/app/services/authentication-services/authentication.service';
+import { User } from 'src/app/model/user.interface';
+import { AuthenticationService } from 'src/app/services/authentication-services/authentication.service';
 import { UsersService } from 'src/app/services/users-services/users.service';
 import { WINDOW } from 'src/app/window-token';
 
@@ -93,6 +94,7 @@ export class UpdateUserProfileComponent implements OnInit {
       }),
       catchError((error: HttpErrorResponse) => {
         this.file.inProgress = false;
+
         return of('Upload failed');
       })).subscribe((event: any) => {
         if(typeof (event) === 'object') {
@@ -100,7 +102,7 @@ export class UpdateUserProfileComponent implements OnInit {
         }
       })
   }
-  
+
   update(){
     this.userService.updateOne(this.form.getRawValue()).subscribe();
   }

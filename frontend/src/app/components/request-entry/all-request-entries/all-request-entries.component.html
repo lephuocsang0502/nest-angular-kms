@@ -1,0 +1,27 @@
+<div style="width: 50%; margin-left: 25%;">
+    <mat-card *ngFor="let requestEntry of requestEntries?.items" style="margin-top:15px;"  (click)="navigate(requestEntry.id)">
+      <div style="display: flex;">
+        <div>
+          <img *ngIf="requestEntry.headerImage !== null; else placeholderImage"
+              src="{{origin}}/api/request-entries/image/{{requestEntry.headerImage}}">
+          <ng-template #placeholderImage>
+              <img src="../../../assets/placeholders/placeholder-blog-entry.png">
+          </ng-template>
+      </div>
+        <div style="margin-left:30px;">
+            <h2>Name: {{requestEntry.spokeCo}}</h2>
+            <p>Description: {{requestEntry.description}}</p>
+            <a routerLink="../../users/{{requestEntry.author.id}}">
+              Author: {{requestEntry.author.name}}
+            </a>
+        </div>
+      </div>
+    </mat-card>
+    <mat-paginator
+    [length]="requestEntries?.meta.totalItems"
+    [pageSize]="requestEntries?.meta.itemsPerPage"
+    [pageSizeOptions]="[5,10,25,100]"
+    (page)="pageEvent = $event; onPaginateChange($event)"
+    showFirstLastButtons>
+    </mat-paginator>
+</div>

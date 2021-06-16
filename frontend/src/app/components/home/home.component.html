@@ -1,0 +1,5 @@
+<h1 style="margin-top: 15px;">All Request Entries</h1>
+<app-all-request-entries
+[requestEntries] = "requestEntries$ | async"
+(paginate) = "onPaginateChange($event)"
+></app-all-request-entries>

@@ -66,7 +66,7 @@ export class RegisterComponent implements OnInit {
 
   onSubmit(){
     if(this.registerForm.invalid) {
-      return;
+      return ;
     }
     console.log(this.registerForm.value);
     this.authService.register(this.registerForm.value).pipe(

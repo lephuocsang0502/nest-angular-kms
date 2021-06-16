@@ -14,14 +14,21 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatSelectModule} from '@angular/material/select';
 import {MatTableModule} from '@angular/material/table';
 import { MatCardModule} from '@angular/material/card';
-import { UsersComponent } from './components/users/users.component';
+import { UsersComponent } from './components/user/users/users.component';
 import {MatPaginatorModule} from '@angular/material/paginator';
-import { UserProfileComponent } from './components/user-profile/user-profile.component';
-import { UpdateUserProfileComponent } from './components/update-user-profile/update-user-profile.component';
+import { UserProfileComponent } from './components/user/user-profile/user-profile.component';
+import { UpdateUserProfileComponent } from './components/user/update-user-profile/update-user-profile.component';
 import { JwtHelperService, JWT_OPTIONS } from "@auth0/angular-jwt";
 import { JwtInterceptor } from './interceptors/jwt.interceptor';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import {MatIconModule} from '@angular/material/icon';
+import { HomeComponent } from './components/home/home.component';
+import { AllRequestEntriesComponent } from './components/request-entry/all-request-entries/all-request-entries.component';
+import { CreateRequestEntryComponent } from './components/request-entry/create-request-entry/create-request-entry.component';
+import {MarkdownModule} from 'ngx-markdown';
+import { ViewRequestEntryComponent } from './components/request-entry/view-request-entry/view-request-entry.component'
+import { WINDOW_PROVIDERS } from './window-token';
+
 
 
 @NgModule({
@@ -31,7 +38,11 @@ import {MatIconModule} from '@angular/material/icon';
     RegisterComponent,
     UsersComponent,
     UserProfileComponent,
-    UpdateUserProfileComponent
+    UpdateUserProfileComponent,
+    HomeComponent,
+    AllRequestEntriesComponent,
+    CreateRequestEntryComponent,
+    ViewRequestEntryComponent
   ],
   imports: [
     BrowserModule,
@@ -49,15 +60,18 @@ import {MatIconModule} from '@angular/material/icon';
     MatPaginatorModule,
     MatCardModule,
     MatProgressBarModule,
-    MatIconModule
+    MatIconModule,
+    MarkdownModule.forRoot()
+
   ],
   providers: [
+    WINDOW_PROVIDERS,
     JwtHelperService,
-    { 
-      provide: JWT_OPTIONS, 
+    {
+      provide: JWT_OPTIONS,
       useValue:JWT_OPTIONS
     },
-    
+
     {
       provide:HTTP_INTERCEPTORS,
       useClass:JwtInterceptor,

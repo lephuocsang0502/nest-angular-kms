@@ -34,6 +34,7 @@ export class UserService {
             })
         )
     }
+    
     findOne(id: number): Observable<User> {
         return from(this.userRepository.findOne({ id },{ relations:['requestEntries']})).pipe(
             map((user: User) => {                           
